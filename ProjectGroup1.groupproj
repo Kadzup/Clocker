@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CB2A49C4-F9FD-4984-9918-E70C66578C77}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ClockerPackage.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="forms\Project1.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ClockerPackage">
+        <MSBuild Projects="ClockerPackage.cbproj"/>
+    </Target>
+    <Target Name="ClockerPackage:Clean">
+        <MSBuild Projects="ClockerPackage.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClockerPackage:Make">
+        <MSBuild Projects="ClockerPackage.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Project1">
+        <MSBuild Projects="forms\Project1.cbproj"/>
+    </Target>
+    <Target Name="Project1:Clean">
+        <MSBuild Projects="forms\Project1.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Project1:Make">
+        <MSBuild Projects="forms\Project1.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ClockerPackage;Project1"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ClockerPackage:Clean;Project1:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ClockerPackage:Make;Project1:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
